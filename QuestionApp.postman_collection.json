@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "cea161d3-a0a0-44b4-a6ec-833488e43d19",
+		"name": "QuestionApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29666841",
+		"_collection_link": "https://dark-crater-502821.postman.co/workspace/ProyectsSebas~0dec0023-55bb-4200-8ef4-6d6461b1bd9f/collection/29666841-cea161d3-a0a0-44b4-a6ec-833488e43d19?action=share&source=collection_link&creator=29666841"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"userAdmin\",\r\n  \"password\": \"contra123.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"userAdmin\",\r\n  \"password\": \"contra123.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/createUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"createUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Questions",
+			"item": [
+				{
+					"name": "Create questionnarie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNzMwNDEzNSwiZXhwIjoxNzE3MzA3NzM1fQ.WKtSRaj4OrT9Uqp3r7CkdysmxQgd5mZfvduyTbpkAxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"theme\": \"Espacio\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"¿Cuál es el planeta más grande del sistema solar?\",\r\n            \"answer1\": \"Mercurio\",\r\n            \"answer2\": \"Júpiter\",\r\n            \"answer3\": \"Saturno\",\r\n            \"answer4\": \"Tierra\",\r\n            \"correct_answer\": \"Júpiter\"\r\n        },\r\n        {\r\n            \"question\": \"¿Qué es la Vía Láctea?\",\r\n            \"answer1\": \"Un agujero negro\",\r\n            \"answer2\": \"Una galaxia\",\r\n            \"answer3\": \"Un cometa\",\r\n            \"answer4\": \"Una estrella\",\r\n            \"correct_answer\": \"Una galaxia\"\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShowQuestions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNzMwNDEzNSwiZXhwIjoxNzE3MzA3NzM1fQ.WKtSRaj4OrT9Uqp3r7CkdysmxQgd5mZfvduyTbpkAxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ConsultQuestion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNzMwNDEzNSwiZXhwIjoxNzE3MzA3NzM1fQ.WKtSRaj4OrT9Uqp3r7CkdysmxQgd5mZfvduyTbpkAxU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/questions/?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"questions",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AdminQuestion",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNzMwODY4MSwiZXhwIjoxNzE3MzEyMjgxfQ.MDgnTDgJnz8hTB4KDQfsgsZ861PCwQzMNuHtVRXWIAg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserAnswer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNzM0MzM5NSwiZXhwIjoxNzE3MzQ2OTk1fQ.gjQEufLv_jKcnTA_wBMN5rtEz3WPPd90nLrbf2EAQRA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"idQuestionnaire\":2,\r\n    \"answers\": [\r\n        {\r\n            \"question_id\": 3, \r\n            \"user_answer\": \"Júpiter\"\r\n        },\r\n        {\r\n            \"question_id\": 4, \r\n            \"user_answer\": \"Una galaxia\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/questionUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"questionUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShowResolvedQuestions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNzM0Mzk0NSwiZXhwIjoxNzE3MzQ3NTQ1fQ.lG9jd35geqSIplEkO6QglbtDUt20-_drMrCIeWzrNt8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/questionsResolved",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"questionsResolved"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
