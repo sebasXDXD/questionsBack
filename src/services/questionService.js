@@ -186,3 +186,51 @@ export const createUserQuestion = async (idQuestionnaire, userId, questionId, us
         throw error;
     }
 };
+
+// questionService.js
+export const getResolvedQuestions = async () => {
+    const [rows] = await pool.query(`
+        SELECT 
+            uq.user_id,
+            q.id AS question_id,
+            q.question,
+            q.answer1,
+            q.answer2,
+            q.answer3,
+            q.answer4,
+            q.correct_answer,
+            uq.user_answer,
+            qt.theme
+        FROM 
+            user_question uq
+        JOIN 
+            questions q ON uq.question_id = q.id
+        JOIN 
+            questionnaire qt ON q.id_questionnaire = qt.id
+        ORDER BY 
+            uq.user_id, qt.id, q.id;
+    `);
+
+    // Formatear los datos
+    const formattedData = {};
+
+    rows.forEach(row => {
+        if (!formattedData[row.user_id]) {
+            formattedData[row.user_id] = {
+                userId: row.user_id,
+                questions: []
+            };
+        }
+
+        formattedData[row.user_id].questions.push({
+            question: row.question,
+            answers: [row.answer1, row.answer2, row.answer3, row.answer4],
+            selected: [row.answer1, row.answer2, row.answer3, row.answer4].indexOf(row.user_answer), // Índice de la respuesta seleccionada
+            theme: row.theme,
+            correct_answer: [row.answer1, row.answer2, row.answer3, row.answer4].indexOf(row.correct_answer) // Índice de la respuesta correcta
+        });
+    });
+
+    // Convertir el objeto a un array
+    return Object.values(formattedData);
+};

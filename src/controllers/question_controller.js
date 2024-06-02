@@ -1,4 +1,4 @@
-import {findQuestionById, createQuestionnaire,getQuestionnairesWithQuestions,getQuestionnaireWithQuestionsById, getQuestionsByUserId ,createQuestion,checkUserQuestionnaire, createUserQuestion } from "../services/questionService.js";
+import {findQuestionById,getResolvedQuestions,createQuestionnaire,getQuestionnairesWithQuestions,getQuestionnaireWithQuestionsById, getQuestionsByUserId ,createQuestion,checkUserQuestionnaire, createUserQuestion } from "../services/questionService.js";
 
 // Controlador para la creación de cuestionarios con preguntas
 export const questionCreateController = async (req, res) => {
@@ -96,5 +96,13 @@ export const solveQuestionController = async (req, res) => {
         return res.status(200).json({ message: 'Respuestas guardadas correctamente' });
     } catch (error) {
         return res.status(500).json({ message: 'Error al guardar las respuestas', error: error.message });
+    }
+};
+export const resolvedQuestionsController = async (req, res) => {
+    try {
+        const resolvedQuestions = await getResolvedQuestions();
+        return res.status(200).json(resolvedQuestions);
+    } catch (error) {
+        return res.status(500).json({ message: 'Error al obtener las respuestas de los usuarios', error: error.message });
     }
 };

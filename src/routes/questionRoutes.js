@@ -5,16 +5,22 @@ import {
      questionShowController,
      questionConsultController,
      adminQuestionsController,
-     solveQuestionController
-    // resolvedQuestionsController
+     solveQuestionController,
+     resolvedQuestionsController
 } from "../controllers/question_controller.js";
  
 const router = Router();
+//creacion de cuestionario
 router.post("/questions", authenticateToken, questionCreateController);
+//mostrar todos los cuestionarios
 router.get("/questions", authenticateToken, questionShowController);
+//consultar un cuestionario
 router.get("/question/:id", authenticateToken, questionConsultController);
+//ver cuestionarios propios
 router.get("/admin/questions", authenticateToken, adminQuestionsController);
+//resolver cuestionario
 router.post("/questionUser", authenticateToken, solveQuestionController);
-// router.get("/admin/questions/:id", authenticateToken, resolvedQuestionsController);
+//ver preguntas resueltas por el usuario
+router.get("/admin/questionsResolved", authenticateToken, resolvedQuestionsController);
 
 export default router;
