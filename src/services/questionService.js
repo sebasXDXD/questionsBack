@@ -200,7 +200,7 @@ export const getResolvedQuestions = async () => {
             q.answer4,
             q.correct_answer,
             uq.user_answer,
-            qt.theme
+            qt.theme AS questionnaire_theme
         FROM 
             user_question uq
         JOIN 
@@ -208,29 +208,58 @@ export const getResolvedQuestions = async () => {
         JOIN 
             questionnaire qt ON q.id_questionnaire = qt.id
         ORDER BY 
-            uq.user_id, qt.id, q.id;
+            qt.theme;  -- Ordenamos por usuario, tema y pregunta
     `);
 
     // Formatear los datos
-    const formattedData = {};
+    const formattedData = [];
+
+    let currentUser = null;
+    let currentTheme = null;
+    let questionnaireTheme = null;
+    let userQuestions = null;
 
     rows.forEach(row => {
-        if (!formattedData[row.user_id]) {
-            formattedData[row.user_id] = {
-                userId: row.user_id,
-                questions: []
-            };
+        // Comprobar si es un nuevo usuario o un nuevo tema
+        if (row.user_id !== currentUser || row.theme !== currentTheme) {
+            // Si tenemos preguntas acumuladas, las agregamos al array
+            if (userQuestions) {
+                formattedData.push({
+                    userId: currentUser,
+                    theme: currentTheme,
+                    questions: userQuestions
+                });
+            }
+
+            // Inicializar las preguntas para el nuevo usuario y tema
+            currentUser = row.user_id;
+            currentTheme = row.theme;
+            questionnaireTheme = row.questionnaire_theme;
+            userQuestions = [];
         }
 
-        formattedData[row.user_id].questions.push({
+        // Agregar la pregunta actual al array de preguntas del usuario y tema actual
+        userQuestions.push({
             question: row.question,
             answers: [row.answer1, row.answer2, row.answer3, row.answer4],
             selected: [row.answer1, row.answer2, row.answer3, row.answer4].indexOf(row.user_answer), // Índice de la respuesta seleccionada
-            theme: row.theme,
-            correct_answer: [row.answer1, row.answer2, row.answer3, row.answer4].indexOf(row.correct_answer) // Índice de la respuesta correcta
+            correct_answer: [row.answer1, row.answer2, row.answer3, row.answer4].indexOf(row.correct_answer), // Índice de la respuesta correcta
+            theme: row.questionnaire_theme, // Añadir el tema del cuestionario a cada pregunta
         });
     });
 
-    // Convertir el objeto a un array
-    return Object.values(formattedData);
+    // Agregar el último conjunto de preguntas al array
+    if (userQuestions) {
+        formattedData.push({
+            userId: currentUser,
+            theme: currentTheme,
+            questions: userQuestions
+        });
+    }
+
+    return formattedData;
 };
+
+
+
+

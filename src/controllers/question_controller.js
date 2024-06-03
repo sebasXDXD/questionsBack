@@ -3,8 +3,8 @@ import {findQuestionById,getResolvedQuestions,createQuestionnaire,getQuestionnai
 // Controlador para la creación de cuestionarios con preguntas
 export const questionCreateController = async (req, res) => {
     try {
-        const { user_created_id, theme, questions } = req.body;
-
+        const { theme, questions } = req.body;
+        const user_created_id = req.userId;
         // Crear el cuestionario
         const newQuestionnaire = await createQuestionnaire(user_created_id, theme);
 
