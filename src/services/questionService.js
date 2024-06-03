@@ -208,7 +208,7 @@ export const getResolvedQuestions = async () => {
         JOIN 
             questionnaire qt ON q.id_questionnaire = qt.id
         ORDER BY 
-            qt.theme;  -- Ordenamos por usuario, tema y pregunta
+            q.question;  -- Ordenamos por usuario
     `);
 
     // Formatear los datos
